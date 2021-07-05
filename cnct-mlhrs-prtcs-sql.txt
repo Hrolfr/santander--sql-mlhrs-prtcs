@@ -105,6 +105,34 @@ https://www.postgresql.org/download/
 Documentação completa:
 https://www.postgresql.org/docs/manuals/
 
+e d) feito
+
+-----------------------------------------------------------------
+//dia 05/07
+
+Objetos e tipos de dados do PostgreSQL
+
+a) O que é o arquivo postgresql.conf
+
+arquivo postgresql.conf
+
+Definição 
+Arquivo onde estão definidas e armazenadas todas as 
+configurações do servidor PostgreSQL.
+Akguns parametros só podem ser alterados com a reinicializa-
+_ção do banco de dados.
+A view pg-settings, acessada por dentro do banco de dados,
+guarda todas as configurações atuais.
+
+
+
+
+
+
+
+
+
+
 
 
 
