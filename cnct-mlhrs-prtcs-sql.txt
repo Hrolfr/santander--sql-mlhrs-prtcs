@@ -124,6 +124,46 @@ _ção do banco de dados.
 A view pg-settings, acessada por dentro do banco de dados,
 guarda todas as configurações atuais.
 
+SELECT name, setting
+FROM pg_settings;
+
+Ou é possível utilizar o comando
+
+SHOW[parametro];
+
+Localização do arquivo postgresql.conf
+Por padrão, encontra-se dentro do diretório PGDATA definido
+no momento da inicialização do cluster de banco de dados.
+
+No sistema operacional Ubuntu, se o PostgreSQL foi instalado
+a partir do repositório oficial, o local do arquivo 
+postgresql.conf será diferente do diretório de dados.
+
+/etc/postgresql/[versão]/[nome do cluster]/postgresql.conf 
+
+Configurações de conexão
+
+- LISTEN_ADRESSES
+  Endereço(s) TCP/IP das interfaces que o servidor PostgreSQL
+vai escutar/liberar conexões.
+- PORT
+  A porta TCP que o servidor PostgreSQL vai ouvir.O padrão é
+5432.
+- MAX_CONNECTIONS
+  Número máximo de conexões simultaneas no servidor PostgreSQL.
+- SUPERUSER_RESERVED_CONNECTIONS
+  Número de conexões (slots) reservadas para conexões ao banco
+de dados de super usuários
+- AUTHENTICATION_TIMEOUT
+   Tempo máximo em segundos para o cliente conseguir uma conexão
+com o servidor.
+- PASSWORD_ENCRYPTION
+   Algoritmo de criptografia para senhas dos novos usuários 
+criados no banco de dados.
+- SSL
+  Habilita a conexão criptografada por SSL
+  (Somente se o  PostgreSQL foi compilado com suporte SSL) 
+
 
 
 
