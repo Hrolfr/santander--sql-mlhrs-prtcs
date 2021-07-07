@@ -267,9 +267,46 @@ dados.PG_DUMP NÃO É BACKUP)
 - reindexdb(fazer reindex)
 - vacuumdb (reorganizar todas as tabelas)
 
-
-
 (algum dos mais importantes)
+
+Arquitetura/Hierarquia
+
+Cluster
+Coleção de banco de dados que compartilham as mesmas 
+configurações (arquivos de configuração PostgreSQL e do SO
+(porta, listen_adresses, etc)).
+
+Banco de dados(database)
+Conjunto de schemas com seus objetos/relações (tabelas,
+funçõe,views, etc).
+
+Schema
+Conjunto de objetos/relações (tabelas,funçõe,views, etc).
+
+b)Conheça a ferramenta PGAdmin
+
+
+PGAdmin
+Importante para conexão
+
+1. Liberar acesso ao cluster em postgresql.conf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
