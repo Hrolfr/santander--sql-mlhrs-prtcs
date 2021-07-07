@@ -184,20 +184,49 @@ colocar o *.
 listen_adresses = 'local host' (padrão)
 listen_adresses = '*' (não pode)
 
+O arquivo pg_hba.conf
 
+Definição
+Arquivo responsável pelo controle de autentificação dos
+usuários no servidor PostgreSQL.
+O formato do arquivo pode ser:
 
+local     database user auth-method   [auth-options]
+host      database user adress      auth-method  [auth-options]
+hostssl   database user adress      auth-method  [auth-options]
+hostnossl database user adress      auth-method  [auth-options]
+host      database user IP-adress   IP-mask       auth-method    [auth-options]
+hostssl   database user IP-adress   IP-mask       auth-method    [auth-options]
+hostnossl database user IP-adress   IP-mask       auth-method    [auth-options] 
 
+(tem mais ao lado ->)
 
+auth-method(forma de autenticação)
+auth-options(opções de autenticação)
 
+host - endereço de onde vem a conexão
+hostssl - desde que aquele endereço esteja usando o ssl
+hostnossl - não requisita cnexão criptografada.
 
+Métodos de autenticação
+- TRUST (conexão por requisição de senha)
+- REJECT (rejeitar conexões)
+- MD5 (criptografar md5)
+- PASSWORD (senha sem criptografia)
+- GSS (generic security service application program interface)
+- SSPI (security support provider interface - somente para 
+Windows)
+- KRB5(kerberos V5)
+- IDENT(utiliza o usuário do sistema operacional do cliente via
+ident server)
+- PEER(utiliza o usuário do sistema operacional do cliente)
+- LDAP(Idao server)
+- RADIUS(radius server)
+- CERT(autenticação via certificado ssl do cliente)
+- PAM(pluggable authentication modules.O usuário precisa estar
+no )
 
-
-
-
-
-
-
-
+min 21:49
 
 
 
