@@ -226,7 +226,84 @@ ident server)
 - PAM(pluggable authentication modules.O usuário precisa estar
 no )
 
-min 21:49
+//dia 07/07
+
+O arquivo pg_ident.conf
+
+Definição
+Arquivo responsável por mapear os usuários do sistema operacional
+com os usuários do banco de dados.
+Localizado no diretório de dados PGDATA da sua instalação.
+A opção ident deve ser utilizada no arquivo pg_hba.conf.
+
+Ident cria mapeamentos, funciona como:
+
+# MAPNAME SYSTEM-USERNAME PG-USERNAME
+diretoria daniel          pg_diretoria
+comercial tiburcio        pg_comercial
+comercial valdeci         pg_comercial
+
+Comandos administrativos do PostgreSQL
+
+No services do Windows eu posso acessar os comandos facilmente
+pois ele tem interface gráfica com o start, stop e etc.
+
+
+se o Postgre foi instalado compilado, então tenho:
+
+Binários do PostgreSQL
+- createdb (cria banco de dados por fora do cluster)
+- createuser (cria user)
+- dropdb     (apaga o bd)
+- dropuser   (apaga o user)
+- initdb      (inicia o cluster, cria coisas pra mim)
+- pg_ctl      (pra controlar o banco de dados start stop)
+- pg_basebackup (copia um backup de toda a estrutura)
+- pg_dump / pg_dumpall (pseudobackup, pois vais extrair um 
+formato de texto ou outro as infos daquele momento do banco de
+dados.PG_DUMP NÃO É BACKUP)
+- pg_restore(restaura os arquivos que gerei com o dump)
+- psql (arquivo binário pra entrar no banco de dados via SO)
+- reindexdb(fazer reindex)
+- vacuumdb (reorganizar todas as tabelas)
+
+
+
+(algum dos mais importantes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
