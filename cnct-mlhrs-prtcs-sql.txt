@@ -287,22 +287,27 @@ b)Conheça a ferramenta PGAdmin
 
 
 PGAdmin
+
+Sempre que tiver problema para conectar,confira:
+
 Importante para conexão
 
 1. Liberar acesso ao cluster em postgresql.conf
 
+// dia 12/07
+
+2. Liberar acesso ao cluster para o usuário do banco de
+dadis em pg_hba.cong
+
+3. Criar/editar usuários.
 
 
+local all postgres md5 (md5 em tudo)
 
 
+reload - recarrega
 
-
-
-
-
-
-
-
+é uma boa prática colocar comentários no bd
 
 
 
