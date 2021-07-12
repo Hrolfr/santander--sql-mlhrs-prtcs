@@ -456,6 +456,45 @@ SUPERUSER | NOSUPERUSER
 Excluindo uma role
 DROP ROLE role_specification;
 
+CREATE ROLE professores NOCREATEDB(não sou obrigada a colocar o 
+nocreate)
+
+Administrando acessos (GRANT)
+
+Definição
+São os privilégos de acesso aos objetos do banco de dados.
+
+Privilégios:
+
+-- tabela (especial)
+-- coluna
+-- sequence
+-- database (especial)
+-- domain
+-- foreign data wrapper
+-- foreign server
+-- function (especial)
+-- language
+-- language object
+-- schema (especial)
+-- tablespace
+-- type
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
