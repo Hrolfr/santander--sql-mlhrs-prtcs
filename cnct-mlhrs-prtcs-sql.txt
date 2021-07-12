@@ -310,7 +310,8 @@ reload - recarrega
 é uma boa prática colocar comentários no bd
 
 
-
+tuples in - inserts, deletes, updates
+tuples out - o que é retornado dos comandos sql
 
 
 
