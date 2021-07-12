@@ -480,6 +480,16 @@ Privilégios:
 -- tablespace
 -- type
 
+DATASE
+GRANT{{CREATE | CONNECT | TEMPORARY | TEMP} [, ...] | ALL PRIVILEGES]}
+ON DATABASE database_name[, ...]
+TO role_specification [, ...] [WITH GRANT OPTION]
+
+SCHEMA
+
+
+TABLE
+minuto 27:12
 
 
 
