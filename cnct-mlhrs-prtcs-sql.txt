@@ -324,25 +324,68 @@ em comum ou específicas.
 
 Nas versões anteriores do PostgreSQL 8.1, usuários e roles tinham 
 comportamentos diferentes.
+Atualmente, roles e users são alias.
 
 É possível que roles pertençam as outras roles.
 
 
 
+ex:
+
+
+administradores - professores (daniel) (robert) - alunos (Gumercindo)
+(role)            (role)                          (role)
 
 
 
+Se as roles daniel e robert estão em professores,podem escrever 
+em duas tabelas e ler todas as tabelas do bd.
+
+Gumercindo só pode ler tabelas.
 
 
+Administrando users/roles/groups
 
 
+CREATE ROLE name[[WITH] option[...]]
 
+where option can be
 
+SUPERUSER | NOSUPERUSER
+| CREATEDB | NOCREATEDB
+| CREATEROLE | NOCREATEROLE (a role poderá criar?)
+| INHERIT | NOINHERIT (roles que pertencem a outras 
+e podem herdar ou não as permissões de adm)
+| LOGIN | NOLOGIN (a role pode se conectar?)
+| REPLICATION | NOREPLICATION
+| BYPASSRLS| NOBYPASSRLS (segurança da role)
+| CONNECTION LIMIT connlimit (quntas conexões simultaneas)
+| [ENCRYPTED] PASSWORD 'password'| PASSWORD NULL (encrypted ou
+n, backup, restore, a senha é criptografada).
+| VALID UNTIL 'timestamp' (até que data a role tem acesso ao bd)
+| IN ROLE role_name [, ...] (o novo user vai pertecer a role do
+in role)
+| IN GROUP role_name [, ...]
+| ROLE role_name [, ...] (a role que informei passará a 
+pertencer ao grupo da nova role sndo criada)
+| ADMIN role-name [, ...] (todas as roles q eu definir farão
+parte da nova role e terão acessos administrativos)
+| USER role_name [, ...] (role)
+| SYSID uid
 
+obs: criar a role superuser e usar somente quando 
+necessário (casos extremos).
 
+ex:
 
-
-
+CREATE ROLE admin.  CREATE ROLE prof. CREATE ROLE alun.
+CREATEDB            NOCREATEDB        NOCREATEDB
+CREATEROLE          NOCREATEROLE      NOCREATEROLE
+INHERIT             INHERIT           INHERIT
+NOLOGIN             NOLOGIN           NOLOGIN    
+REPLICATION         NOBYPASSRLS       NOBYPASSRLS
+BYPASSRLS         CONNECTION LIMIT 10; CONNECTION LIMIT 90;  
+CONNECTION LIMIT -1 
 
 
 
