@@ -314,8 +314,18 @@ tuples in - inserts, deletes, updates
 tuples out - o que é retornado dos comandos sql
 
 
+c) Como administrar usuários no banco de dados
 
+Conceitos users/roles/groups
+Definição
+Roles(papéis ou funções), users e grupo de usuários são "contas",
+perfis de atuação em um banco de dados,que possuem permissões
+em comum ou específicas.
 
+Nas versões anteriores do PostgreSQL 8.1, usuários e roles tinham 
+comportamentos diferentes.
+
+É possível que roles pertençam as outras roles.
 
 
 
