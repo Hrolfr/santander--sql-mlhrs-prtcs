@@ -654,10 +654,34 @@ character varying(n), varchar(n)   variable-lenght with limit
 character(n), char(n)              fixed-lenght, blnak padded
 text                               variable unlimited lenght
 
+diferenças entre varchar e char
+varchar - sem o (n) quando eu escrever algo, ele conta "d" - 1 caracter e etc
+char - sem o (n) tem um só caracter
+
+(tabela de datas está na foto)
+
+timezone é pra caso vc esteja fora do Brasil, por exemplo
+
+Booleanos
+Name      Storage Size    Description
+boolean     1 byte         true or false
+
+obs: modele as coisas de forma inteligente, não coloque coisas desnecessárias.
 
 
+DML e DDL
 
+DML
+Data Manipulation Language
+Linguagem de manipulação de dados
+INSERT, UPDATE,DELETE,SELECT*
+*o select, alguns consideram como DML, outros como DQL, que significa
+data language, ou linguagem de consulta de dados.
 
+DDL
+Data Definition Language
+Linguagem de definição de dados
+CREATE, ALTER,DROP
 
 
 
