@@ -634,7 +634,7 @@ Pseudo-Types
 
 * são o que usaremos
 
-Numéricos  Storage Size
+Numéricos  Storage Size...
 smallint
 integer
 bigint
@@ -647,6 +647,12 @@ serial
 bigserial
 
 
+
+Caracteres
+Name                               Description
+character varying(n), varchar(n)   variable-lenght with limit
+character(n), char(n)              fixed-lenght, blnak padded
+text                               variable unlimited lenght
 
 
 
