@@ -532,28 +532,55 @@ REVOKE ALL ON DATABASE [database] FROM [role];
 se eu não poder excluir uma role por ela ter muitos dependentes,
 coloco os comandos de cima e aí sim o drop vai funcionar.  
 
+d) Objetos e comandos do banco de dados
+
+Database não compartilham objetos dentro de cada banco.
+Schemas conjunto de objs dentro do bd.Tabelas,views em fim, coisas q posso 
+administrar.
+
+Database
+CREATE DATABASE name
+[[WITH] [OWNER [=] user_name]
+   [ TEMPLATE [=] template]
+   [ ENCODING [=] encoding]
+   [ LC_COLLATE [=] lc_collate]
+   [ LC_CTYPE [=] lc_ctype]
+   [ TABLESPACE [=] tablespace_name] (onde está no disco)
+   [ALLOW_CONECTIONS [=] allow_conn]
+   [ CONNECTION_LIMIT [=] connlimit]
+   [IS_TEMPLATE [=] istemplate ]]
+
+ALTER DATABASE name RENAME TO new_name
+ALTER DATABASE name OWNER TO {new_owner | CURRENT_USER | SESSION_USER}
+ALTER DATABASE name SET TABLESPACE TO new_tablespace
+
+DROP DATABASE[name] apagar bd
 
 
+Schema
+CREATE SCHEMA schema_name [AUTHORIZAION role_specification]
 
+ALTER SCHEMA name RENAME TO new_name
+ALTER SCHEMA name OWNER TO {new_owner | CURRENT-USER | SESSION USER}
 
+DROP SCHEMA[nome]
 
+Melhores práticas
+CREATE SCHEMA IF NOT EXISTS schema_name [AUTHORIZATION role_specification] (idempotencia?)
+DROP SCHEMA IF EXISTS [nome];
 
+Exemplo de tabela:
 
+TABELA = automovel
+COLUNA 1 = (carro, moto, aviao, helicoptero)
+COLUNA 2 = ano_fabricacao (2010, 2011, 2020)
+COLUNA 3 = capacidade_pessoas (1, 3, 350)
+COLUNA 4 = fabricante (Honda, Avianca, Yamaha)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+TABELA = 
+COLUNA 1 = codigo serial do produto
+COLUNA 2 = tipo (vestuário, eletronico, beleza)
+COLUNA 3 = preco
 
 
 
