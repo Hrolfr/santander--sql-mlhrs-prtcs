@@ -482,28 +482,46 @@ Privilégios:
 
 DATASE
 GRANT{{CREATE | CONNECT | TEMPORARY | TEMP} [, ...] | ALL PRIVILEGES]}
-ON DATABASE database_name[, ...]
+ON DATABASE database_name [, ...]
+TO role_specification [, ...] [WITH GRANT OPTION]
+13/07
+SCHEMA
+GRANT{{CREATE | USAGE } [, ...] | ALL PRIVILEGES]}
+ON SCHEMA schema_name [, ...]
+TO role_specification [, ...] [WITH GRANT OPTION]
+TABLE
+GRANT{{SELECT| INSERT| UPDATE| DELETE| TRUNCATE| REFERENCES| TRIGGER}
+ [, ...] | ALL PRIVILEGES]}
+ON {TABLE} table_name[, ...]
 TO role_specification [, ...] [WITH GRANT OPTION]
 
+legenda:
+CREATE - create obj database
+CONNECT - conectar
+TEMPORARY, TEMP - criar objs temporários no bd
+ALL PRIVILEGES - (já sabe..)
+
 SCHEMA
+CREATE - criar os objs
+USAGE - utilizar os objs
+PUBLIC - dá a permissão do user se conectar no bd
 
+REVOKE (revogar)
+Retira as permissões da role.
 
-TABLE
-minuto 27:12
+DATABASE
+REVOKE[GRANT OPITION FOR]
+{{CREATE | CONNECT| TEMPORARY| TEMP } [, ...] | [ALL PRIVILEGES]}
+ON {DATABASE database_name [, ...]
+FROM {[GROUP] role.name | PUBLIC} [, ...]  
+[CASCADE | RESTRICT]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+SCHEMA
+REVOKE[GRANT OPITION FOR]
+{{CREATE | USAGE} [, ...] | [ALL PRIVILEGES]}
+ON SCHEMA schema_name [, ...]
+FROM {[GROUP] role.name| PUBLIC} [, ...]  
+[CASCADE | RESTRICT]
 
 
 
