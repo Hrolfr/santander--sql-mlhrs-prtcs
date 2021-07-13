@@ -577,33 +577,61 @@ COLUNA 2 = ano_fabricacao (2010, 2011, 2020)
 COLUNA 3 = capacidade_pessoas (1, 3, 350)
 COLUNA 4 = fabricante (Honda, Avianca, Yamaha)
 
-TABELA = 
+TABELA = produto
 COLUNA 1 = codigo serial do produto
 COLUNA 2 = tipo (vestuário, eletronico, beleza)
 COLUNA 3 = preco
 
+Na prática:
+
+NOME      MARCA    TAMANHO    COR
+Camisa    Hering    GG        Branca
+Calça     Levis     46        Preta
+
+(claro, tem as linhas.)
+
+Observação sobre a Primary Key:
+
+"Não devem ser usadas chaves externas" de fato é verdade, porém
+em boas práticas não seguimos as vezes,pois é opcional.
 
 
+Obs: o valor não pode ser voláti/ ser alterado
 
+PK: nome+marca+tamanho com osdados são primary key
 
+Foreign key/FK
+sempre vai referenciar a PK.
 
+PK - número 
+FK - cliente - cpf, número de série - produto
 
+Usam a PK ID pois pode repetir o cliente, mas não o produto
 
+Tipos de dados
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Numeric Types *
+Monetary Types
+Character Types *
+Binary Data Type
+Date/Time Types *
+Boolean Type *
+Enumerated Types
+Geometric Types
+Network Adress Types
+Bil String Types
+Text Search Types
+UUID type
+XML Type
+JSON Types
+Arrays
+Composite Types
+Range Types
+Domain Types
+Object Identifier Types
+ps=g_Isn Type
+Pseudo-Types
+ 
 
 
 
