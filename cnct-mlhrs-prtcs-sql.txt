@@ -629,9 +629,37 @@ Composite Types
 Range Types
 Domain Types
 Object Identifier Types
-ps=g_Isn Type
+pg_Isn Type
 Pseudo-Types
- 
+
+* são o que usaremos
+
+Numéricos  Storage Size
+smallint
+integer
+bigint
+decimal
+numeric
+real
+double precision
+smallserial
+serial
+bigserial
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
