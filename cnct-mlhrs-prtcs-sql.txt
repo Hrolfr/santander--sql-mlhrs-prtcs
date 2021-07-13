@@ -523,10 +523,14 @@ ON SCHEMA schema_name [, ...]
 FROM {[GROUP] role.name| PUBLIC} [, ...]  
 [CASCADE | RESTRICT]
 
+REVOGANDO TODAS AS PERMISSÕES (SIMPLIFICADO)
 
+REVOKE ALL ON ALL TABLES IN SCHEMA [schema] FROM [role];
+REVOKE ALL ON SCHEMA [schema] FROM [role];
+REVOKE ALL ON DATABASE [database] FROM [role];
 
-
-
+se eu não poder excluir uma role por ela ter muitos dependentes,
+coloco os comandos de cima e aí sim o drop vai funcionar.  
 
 
 
