@@ -795,13 +795,61 @@ WHERE data_criacao IS NULL;
 
 1- mudando o codigo dos bancos
 2-data de criação nula para atual
-
+----------------------------------------
 DELETE
 
 DELETE FROM [nome da tabela]
-[ WHERE + condições]
+[WHERE + condicoes]
 
 ATENÇÃO: muito cuidado com os deletes.Sempre utilize-os com condição.
+
+exemplo:
+
+DELETE FROM banco
+WHERE codigo = 512;
+
+DELETE FROM banco
+WHERE nome = 'Conta Digital';
+-----------------------------
+SELECT
+
+SELECT [campos da tabela]
+FROM [nome da tabela]
+[WHERE + condições]
+
+DICAS DE BOAS PRÁTICAS = Evite sempre que puder o SELECT*
+
+se tenho 100 campos na tabela, quando eu mandar o SELECT* ela trará todos
+os campos, e convenhamos, nem sempre vc precisa de todos.Use o SELECT ID.
+Isso é desperdíco de recurso, pesa.
+
+Exemplo:
+
+SELECT codigo, nome
+FROM banco;
+
+SELECT codigo, nome
+FROM banco
+WHERE data_criacao > ''2019-10-15 15:00:00'; (esse é específico)
+
+senha Postgres - 123
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
