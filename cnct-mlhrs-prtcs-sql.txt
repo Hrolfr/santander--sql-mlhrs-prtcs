@@ -831,9 +831,20 @@ FROM banco;
 SELECT codigo, nome
 FROM banco
 WHERE data_criacao > ''2019-10-15 15:00:00'; (esse é específico)
-
+========================
 senha Postgres - 123
+========================
 
+Boas práticas:
+
+ativo BOOLEAN NOT NULL DEFAULT TRUE, 
+
+diz se o banco tá ativo ou não.
+
+e
+
+data_criacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+que funciona igual a como se tivesse o NOW() no final
 
 
 
