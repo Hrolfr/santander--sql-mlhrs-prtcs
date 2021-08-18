@@ -1,4 +1,4 @@
-Conceitos e melhores práticas com banco de dados PostgreSQL
+1)Conceitos e melhores práticas com banco de dados PostgreSQL
 
 a) Fundamentos de Banco de Dados
 
@@ -110,7 +110,7 @@ e d) feito
 -----------------------------------------------------------------
 //dia 05/07
 
-Objetos e tipos de dados do PostgreSQL
+2)Objetos e tipos de dados do PostgreSQL
 
 a) O que é o arquivo postgresql.conf
 
@@ -674,7 +674,7 @@ DML e DDL
 DML
 Data Manipulation Language
 Linguagem de manipulação de dados
-INSERT, UPDATE,DELETE,SELECT*
+INSERT, UPDATE,DELETE,*SELECT*
 *o select, alguns consideram como DML, outros como DQL, que significa
 data language, ou linguagem de consulta de dados.
 
@@ -683,18 +683,54 @@ Data Definition Language
 Linguagem de definição de dados
 CREATE, ALTER,DROP
 
+CREATE/ ALTER/ DROP
 
+CREATE [objeto] [nome do objeto] [opções]; 
 
+ALTER [objeto] [nome do objeto] [opções];
 
+DROP [objeto] [nome do objeto] [opções];
 
+Exemplos:
+(DDL)
 
+CREATE DATABASE dadosbancarios;
+ALTER DATABASE dadosbancarios OWNER TO diretoria;
+DROP DATABASE dadosbancarios;
 
+CREATE SCHEMA IF NOT EXISTS bancos;
+ALTER SCHEMA bancos OWNER TO diretoria;
+DROP SCHEMA IF EXISTS bancos;
 
+outros exemplos:
 
+CREATE TABLE [IF NOT EXISTS] [nome da tabela] (
+[nome do campo] [tipo] [regras] [opções],
+[nome do campo] [tipo] [regras] [opções],
+[nome do campo] [tipo] [regras] [opções]
+);
 
+ALTER TABLE [nome a tabela] [opções];
 
+DROP TABLE [nome da tabela];
 
+EIN)
+CREATE TABLE IF NOT EXISTS banco (
+codigo INTEGER PRIMARY KEY,
+nome VARCHAR(50) NOT NULL,
+data_criacao TIMESTAMP NOT NULL DEFAULT NOW()
+);
 
+CREATE TABLE IF NOT EXISTS banco (
+codigo INTEGER,
+nome VARCHAR(50) NOT NULL,
+data_criacao TIMESTAMP NOT NULL DEFAULT NOW(),
+PRIMARY KEY (codigo)
+);
+
+ALTER TABLE banco ADD COLUMN tem_popanca BOOLEAN;
+
+DROP TABLE IF EXISTS banco ;
 
 
 
