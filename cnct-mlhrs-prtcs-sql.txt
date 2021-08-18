@@ -702,7 +702,7 @@ CREATE SCHEMA IF NOT EXISTS bancos;
 ALTER SCHEMA bancos OWNER TO diretoria;
 DROP SCHEMA IF EXISTS bancos;
 
-outros exemplos:
+CREATE/ ALTER/ DROP - TABELAS
 
 CREATE TABLE [IF NOT EXISTS] [nome da tabela] (
 [nome do campo] [tipo] [regras] [opções],
@@ -716,11 +716,12 @@ DROP TABLE [nome da tabela];
 
 EIN)
 CREATE TABLE IF NOT EXISTS banco (
-codigo INTEGER PRIMARY KEY,
+codigo INTEGER PRIMARY KEY, 
 nome VARCHAR(50) NOT NULL,
 data_criacao TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+TSVEI)
 CREATE TABLE IF NOT EXISTS banco (
 codigo INTEGER,
 nome VARCHAR(50) NOT NULL,
@@ -728,11 +729,28 @@ data_criacao TIMESTAMP NOT NULL DEFAULT NOW(),
 PRIMARY KEY (codigo)
 );
 
-ALTER TABLE banco ADD COLUMN tem_popanca BOOLEAN;
+ALTER TABLE banco ADD COLUMN tem_poupanca BOOLEAN;
 
 DROP TABLE IF EXISTS banco ;
 
+ein)
+Explicação:
+1-Definido que o campo codigo é PK;
+2- Com o NOT NULL - o campo não deve ser nulo (PRIMARY KEY também 
+não,o Postgre controla e reclama).
+3- DEFAULT NOW() quando eu inserir um registro nele, automaticamente
+ele será preenchido com NOW (a data atual).
 
+tsvei)
+ele adiciona a coluna tem_poupanca com o booleano
+
+INSERT
+
+INSERT INTO [nome da tabela] ([campos da tabela])
+VALUES ([valores de acordo com a ordem dos campos acima,]);
+
+INSERT INTO [nome da tabela] ([campos da tabela,])
+SELECT [valores de acordo com a ordem dos campos acima,];
 
 
 
