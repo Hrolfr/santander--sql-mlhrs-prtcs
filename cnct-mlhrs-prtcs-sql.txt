@@ -751,11 +751,47 @@ VALUES ([valores de acordo com a ordem dos campos acima,]);
 
 INSERT INTO [nome da tabela] ([campos da tabela,])
 SELECT [valores de acordo com a ordem dos campos acima,];
+(INSERT SELECT) - faz um insert na tabela comvalor de select dos dados.
+É muito útil quando temos um select muito grande(com vários conjuntos de dados)
+e temos que inserí-los sem ficar colocando values.
 
+Exemplo:
 
+INSERT INTO banco (codigo, nome, data_criacao)
+VALUES (100, 'Banco do Brasil', now());
 
+INSERT INTO banco (codigo, nome, data_criacao)
+VALUES 100, 'Banco do Brasil', now();
 
+(ambos funcionam)
 
+UPDATE
+
+UPDATE [nome da tabela] SET
+[campo1] = [novo valor do campo1],
+[campo2] = [novo valor do campo2],
+...
+[WHERE + condições]
+
+ATENÇÃO: muito cuidado com os updates.Sempre utilize-os com condição.
+Se eu não colocar o WHERE, farei update da tabela INTEIRA!PONHA O WHERE
+-------------------------------------
+Exemplo:
+
+UPDATE bancos SET
+[nome] = ['Santander']
+
+todos os bancos se chamarão SANTANDER.
+--------------------------------------
+UPDATE
+
+UPDATE banco SET
+codigo = 500
+WHERE codigo = 100;
+
+UPDATE banco SET
+data_criacao = now()
+WHERE data_criacao IS NULL;
 
 
 
