@@ -846,6 +846,41 @@ e
 data_criacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 que funciona igual a como se tivesse o NOW() no final
 
+INTERGER vai até 214.000.000
+
+obs: se quero referenciar itens, eles devem ser iguais,tais quais:
+
+ numero INTEGER NOT NULL,
+ banco_numero INTEGER NOT NULL,
+
+quais não podem se repetir:
+ PRIMARY KEY (banco_numero,numero),
+
+
+FOREIGN KEY (banco_numero) REFERENCES banco (numero)
+diz que banco_numero é referencia a tabela banco para o campo número
+
+boa prática: separar as tabelas por campos que eu queira ver em certos
+momentos.
+
+A ID não atende a normalização dos bancos de dados,logo, a PK pode ser 
+grande.
+--------------------------------------------------------------------------
+ATIVIDADE:
+Insira dados respeitando as pk e fk
+
+arquivo completo DDL:
+
+github.com/drobcosta/digital_innovation_one
+
+
+
+
+
+
+
+
+
 
 
 
