@@ -873,6 +873,68 @@ arquivo completo DDL:
 
 github.com/drobcosta/digital_innovation_one
 
+3) Fundamentos da Structured Query Language (SQL)
+
+a) Conheça o DML e o Truncate
+
+Idempotencia: propridade que algumas ações/operações possuem possibilitando-as
+de serem executadas diversas vezes sem alterar o resultadp após a aplicação
+inicial;
+
+-IF EXISTS
+-Comandos pertinentes ao DDL e DML
+
+Melhores práticas em DDL
+
+Importante as tagbelas possuírem campos que realmente serão utilizados e que sirvam de
+atributo direto aum objetivo em comum.
+
+-Criar/adicionarr colunas que são "atributos básicos" do objeto;
+Exemplo: tabela CLIENTE: coluna TELEFONE/ coluna AGENCIA_BANCARIA 
+
+-Cuidado com as regras (constraints); 
+
+-Cuidado com o excesso de FKs;
+
+-Cuidado com o tamanho indevido de colunas
+Exemplo: coluna CEP VARCHAR (255)
+
+DML - CRUD
+
+SELECT
+
+SELECT (campos,)
+FROM tabela
+[condições]
+
+Exemplo
+
+SELECT numero, nome FROM banco;
+SELECT numero, nome FROM banco WHERE ativo IS TRUE;
+SELECT nome FROM cliente WHERE email LIKE '%gmail.com';
+
+SELECT numero FROM agencia
+WHERE banco_numero IN (SELECT numero FROM banco WHERE nome ILIKE
+'%Bradesco')
+
+09min6s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
