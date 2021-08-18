@@ -793,9 +793,15 @@ UPDATE banco SET
 data_criacao = now()
 WHERE data_criacao IS NULL;
 
+1- mudando o codigo dos bancos
+2-data de criação nula para atual
 
+DELETE
 
+DELETE FROM [nome da tabela]
+[ WHERE + condições]
 
+ATENÇÃO: muito cuidado com os deletes.Sempre utilize-os com condição.
 
 
 
