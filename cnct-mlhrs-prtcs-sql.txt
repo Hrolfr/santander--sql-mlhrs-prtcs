@@ -949,19 +949,50 @@ Ex:
 SELECT coluna FROM tabela WHERE data > dezembro AND ativo = TRUE
 (mais exemplos na prática)
 
+SELECT - Idempotencia
 
+SELECT (campos,)
+FROM tabela
+WHERE EXISTS(
+  SELECT (campo,)
+  FROM tabela2
+  WHERE campo1 = valor1
+  [AND/OR campoN = valorN]
+);
 
+Não é uma boa prática, embore seja tolerável usar.Melhor utilizar LEFT JOIN.
 
+SELECT* (evitar)
+(é muiiiiitooo abrangente)
 
+INSERT
 
+INSERT (campos da tabela,) VALUES (valores,); 
+(sempre o mesmo número de recursos em cada lado)
 
+INSERT (campos da tabela,) SELECT (valores,);
+-----------------------------------------------------
+INSERT - Idempotencia
 
+INSERT INTO agencia (banco_numero,numero,nome) VALUES (341,1,'Centro da cidade');
 
+INSERT INTO agencia (banco_numero,numero,nome)
+SELECT 341,1,'Centro da cidade'
+WHERE NOT EXISTS (SELECT banco_numero,numero,nome FROM agencia WHERE
+banco_numero = 341 AND numero = 1 AND nome = 'Centro da cidade');
+(não é boa prática, pois é muita informação)
 
+ON CONFLICT
 
+INSERT INTO agencia (banco_numero,numero,nome) VALUES (341,1,'Centro da cidade')
+ON CONFLICT (banco_numero,numero) DO NOTHING;
 
+se eu der um insert numa PK existente, tomo um erro.
 
+ON CONFLICT trabalha baseado numa constrinct, e banco_numero,numero são PKs.Ele 
+diz: se houver um conflito na PK, faça nada.Existem outras opções a usar, tais quais INSERT
 
+INSERT INTO agencia
 
 
 
