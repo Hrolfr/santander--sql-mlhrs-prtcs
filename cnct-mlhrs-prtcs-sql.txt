@@ -1044,6 +1044,79 @@ b) Funções agregadas em PostgreSQL
 
 https://www.postgresql.org/docs/11/functions-aggregate.html
 
+c) Relacionamento entre tabelas
+
+JOINS - são utlizados no momento que realizo a minha consulta,query,selects e 
+preciso unir uma ou mais tabelas no select principal.
+
+- JOIN
+- LEFT JOIN
+- RIGHT JOIN
+- FULL JOIN
+- CROSS JOIN
+
+JOIN(INNER)
+
+SELECT tabela_1.campos, tabela_2.campos
+FROM tabela_1
+JOIN tabela_2
+  ON tabela_2.campo = tabela_1.campo
+(ON é uma condição do JOIN)
+
+Dica: campo Foreign keys tabela2 e PKs na outra tabela,pois gera resultado
+mais inteligentes.
+
+LEFT JOIN (OUTER) / LEFT OUTER JOIN
+Ao 'comparar' tabelas, elas ficam lado a lado.Quando eu falo que quero um
+LEFT OUTER JOIN, digo que as tabelas que estão no relacionamento a esquerda
+vão trazer a tabela por completo e a tabela da direita,se houver um relacio-
+_namento retornará o dado. Se não,retornará dado nulo.Dá só os 10 registros.
+
+SELECT tabela_1.campos, tabela_2.campos
+FROM tabela_1
+LEFT JOIN tabela_2
+ ON tabela_2.campo = tabela_1.campo
+
+(escrevemos da esquerda pra direita)
+
+RIGHT JOIN (OUTER)
+A mesma coisa que o LEFT, mas ele dá prioridade pra tabela da direita;Os 20
+registros da tabela 2 e uma relação só para os 2 primeiros.
+
+SELECT tabela_1.campos, tabela_2.campos
+FROM tabela_1
+RIGHT JOIN tabela_2
+ ON tabela_2.campo = tabela_1.campo
+
+FULL JOIN (FULL OUTER JOIN)
+Trás todas as relações possíveis.Imsagine que:
+
+10 registros na tabela 1 e 20 na 2
+dos 20 rgstrs da segunda tabela, apenas 2 relacionam
+Resultado:
+ele trará os 2 registros relacionados da tabela 1 e 2,os 8 registros da
+tabela 1 sem relaçaõ terão valor nulo e os outros 18 sem relaçaõ virão a 
+seguir.Ele trás todas as possibilidades de relacionamento.
+
+Dica: não use o FULL JOIN em diversas operações de produção,principalmente
+se eu precisar de acesso rápido, pois ele faz uma relação completa estando
+relacionado ou não,e eu terei mais registros do que eu poderia trazer.Não 
+use pra produção.Seu uso geralmente é em relatórios.
+
+
+SELECT tabela_1.campos, tabela_2.campos
+FROM tabela_1
+FULL JOIN tabela_2
+ ON tabela_2.campo = tabela_1.campo
+
+CROSS JOIN 
+(Obs: tomar cuidado, usar só em situações extremas)
+Todos os dados deuma tabela serão cruzados com todos os dados da tabela
+referenciada no CROSS JOIN criando uma matriz.
+
+SELECT tabela_1.campos, tabela_2.campos
+FROM tabela_1
+CROSS JOIN tabela_2
 
 
 
@@ -1060,6 +1133,9 @@ https://www.postgresql.org/docs/11/functions-aggregate.html
 
 
 
+
+
+  
 
 
 
