@@ -886,15 +886,21 @@ inicial;
 
 Melhores práticas em DDL
 
-Importante as tagbelas possuírem campos que realmente serão utilizados e que sirvam de
+Importante as tabelas possuírem campos que realmente serão utilizados e que sirvam de
 atributo direto aum objetivo em comum.
 
--Criar/adicionarr colunas que são "atributos básicos" do objeto;
+-Criar/adicionar colunas que são "atributos básicos" do objeto;
 Exemplo: tabela CLIENTE: coluna TELEFONE/ coluna AGENCIA_BANCARIA 
+(ao puxar o cadastro do cliente,telefone não é algo que me interesse ver,logo,
+devo colocá-lo em outra tabela.Agencia bancária não necessariamente.)O que é útil que
+eu veja? Nome,cpf/cnpjn email e etc
 
 -Cuidado com as regras (constraints); 
+(quanto mais constraints, mais difícil torna updates, inserts e etc,pois tem que validar
+as constraints para que seja um dado correto na tabela.)
 
 -Cuidado com o excesso de FKs;
+(não tenha muitas FKs, e se precisar criar, faça outra tabela).
 
 -Cuidado com o tamanho indevido de colunas
 Exemplo: coluna CEP VARCHAR (255)
