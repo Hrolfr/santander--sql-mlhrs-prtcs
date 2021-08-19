@@ -1005,15 +1005,34 @@ DELETE
 DELETE FROM (tabela) SET campo1 = novo_valor WHERE (condição);
 Quer deletar a tabela inteira?Não?Então faça DELETE com condição.
 -------------------------------------------------------------------
+TRUNCATE
+
+Definição
+"Esvazia" a tabela.
+
+TRUNCATE [TABLE] [ONLY] name [*] [, ...]
+  RESTART IDENTITY | CONTINUE IDENTITY ] [ CASCADE | RESTRICT]
+  Entre esses eu uso ou um ou outro, e o padrão é CONTINUE IDENTITY
 
 
+Se eu fizer isso:
 
+TRUNCATE [TABLE] banco CONTINUE IDENTITY
+e aí limpar a tabela e add novo registro, o próximo registro é o 21.Mas eu
+posso especificar RESTART IDENTITY pra 1, assim ele começa a contagem do 1 (ele
+não recomenda).
 
+RESTRICT é o padrão.Ele respeita as FKs.Se a tabela tem FKs,(por default) ele
+não apaga a tabela. 
+Se eu usar um CASCADE ele vai apagar tudo da tabela e se tiver referencias em 
+outras tabelas ele apaga as referencias também.	 
 
-
-
-
-
+-------------------------------------------------------------------------
+TRUNCATE agencia,banco,cliente,cliente_transacoes,conta_corrente CASCADE
+Primeiro comando que fiz sozinha!ORGULHO
+ALTER TABLE tipo_de_transacao RENAME TO tipo_transacao
+Segundo comandos
+-------------------------------------------------------------------------
 
 
 
