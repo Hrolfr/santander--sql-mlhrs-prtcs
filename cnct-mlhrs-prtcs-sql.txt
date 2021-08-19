@@ -992,9 +992,19 @@ se eu der um insert numa PK existente, tomo um erro.
 ON CONFLICT trabalha baseado numa constrinct, e banco_numero,numero são PKs.Ele 
 diz: se houver um conflito na PK, faça nada.Existem outras opções a usar, tais quais INSERT
 
-INSERT INTO agencia
+INSERT INTO agencia (os dados) ON CONFLICT (PK) DO UPDATE
+(e faco update em algum outro campo)
 
+UPDATE
 
+UPDATE(tabela) SET campo1 = novo_valor WHERE (condição);
+JAMAIS faça update sem WHERE
+
+DELETE
+
+DELETE FROM (tabela) SET campo1 = novo_valor WHERE (condição);
+Quer deletar a tabela inteira?Não?Então faça DELETE com condição.
+-------------------------------------------------------------------
 
 
 
