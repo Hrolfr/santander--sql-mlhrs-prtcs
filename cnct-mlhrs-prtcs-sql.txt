@@ -1034,7 +1034,15 @@ ALTER TABLE tipo_de_transacao RENAME TO tipo_transacao
 Segundo comandos
 -------------------------------------------------------------------------
 
+b) Funções agregadas em PostgreSQL
 
+- AVG (average)
+- COUNT (opção: HAVING)
+- MAX
+- MIN
+- SUM
+
+https://www.postgresql.org/docs/11/functions-aggregate.html
 
 
 

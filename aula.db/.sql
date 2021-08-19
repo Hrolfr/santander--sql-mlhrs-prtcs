@@ -110,3 +110,118 @@ VALUES('55236745812','Selma Santos','2019-7-01 12:00:00') ON CONFLICT (cpf) DO N
 UPDATE teste SET nome = 'Pedro Alvarenga' WHERE cpf = '55236745812';
 
 SELECT * FROM teste;
+
+---------------------------------------------------------------
+Como fazer uma visualização das tabelas sem o SELECT * :
+
+SELECT * FROM information_schema.columns WHERE table_name = 'banco';
+SELECT column_name FROM information_schema.columns WHERE table_name = 'banco';
+SELECT column_name,data_type FROM information_schema.columns WHERE table_name = 'banco';
+----------------------------------------------------------------
+
+--AVG
+--COUNT (having)
+--MAX
+--MIN
+--SUM
+
+SELECT * FROM cliente_transacoes;
+SELECT valor FROM cliente_transacoes;
+
+SELECT AVG (valor) FROM cliente_transacoes;
+--Me dá a média de valores que é: 142.2453468780971259
+
+SELECT COUNT(numero)
+FROM cliente;
+
+SELECT COUNT(numero),email
+FROM cliente
+WHERE email ILIKE '%gmail.com'
+-- gera: ERROR:  column "cliente.email" must appear in the GROUP BY clause or be used in an aggregate function
+--LINE 1: SELECT COUNT(numero),email                           ^
+--SQL state: 42803
+--Character: 22 (eu preciso agrupar,então:)
+
+SELECT COUNT(numero),email
+FROM cliente
+WHERE email ILIKE '%gmail.com'
+GROUP BY email;
+
+SELECT MAX(numero)
+FROM cliente;
+
+SELECT MIN(numero)
+FROM cliente;
+
+--Isso torna-se mais útil quando:
+SELECT MAX(valor)
+FROM cliente_transacoes;
+
+SELECT MIN(valor)
+FROM cliente_transacoes;
+
+SELECT MAX(valor), tipo_transacao_id
+FROM cliente_transacoes;
+-- gera:
+--ERROR:  column "cliente_transacoes.tipo_transacao_id" must appear in the GROUP BY clause or be used in an aggregate function
+--LINE 1: SELECT MIN(valor), tipo_transacao_id
+                          ^
+--SQL state: 42803
+--Character: 20
+
+SELECT MAX(valor), tipo_transacao_id
+FROM cliente_transacoes
+GROUP BY tipo_transacao_id;
+
+SELECT MIN(valor), tipo_transacao_id
+FROM cliente_transacoes
+GROUP BY tipo_transacao_id;
+--Funciona
+
+SELECT column_name,data_type FROM information_schema.columns WHERE table_name = 'cliente_transacoes';
+
+SELECT COUNT(id),tipo_transacao_id
+FROM cliente_transacoes
+GROUP BY tipo_transacao_id
+HAVING COUNT(id) > 150;
+--útil para identificar duplicatas na tabela
+
+SELECT SUM(valor)
+FROM cliente_transacoes;
+
+SELECT SUM(valor), tipo_transacao_id
+FROM cliente_transacoes
+GROUP BY tipo_transacao_id
+ORDER BY tipo_transacao_id ASC;
+--ascendente
+
+SELECT SUM(valor), tipo_transacao_id
+FROM cliente_transacoes
+GROUP BY tipo_transacao_id
+ORDER BY tipo_transacao_id DESC;
+--descendente
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
