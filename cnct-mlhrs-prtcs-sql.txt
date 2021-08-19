@@ -916,14 +916,60 @@ FROM tabela
 Exemplo
 
 SELECT numero, nome FROM banco;
-SELECT numero, nome FROM banco WHERE ativo IS TRUE;
+SELECT numero, nome FROM banco WHERE ativo IS TRUE; (posso colocar com =)
 SELECT nome FROM cliente WHERE email LIKE '%gmail.com';
+(com o LIKE(LIKE respeita o sensitivo) e % ele fará uma busca e trará tudo que termine com gmail.com)
 
 SELECT numero FROM agencia
 WHERE banco_numero IN (SELECT numero FROM banco WHERE nome ILIKE
 '%Bradesco')
+(ILIKE não respeita sensitivo, independente de estar maiúsculo ou minúsculo, 
+e ele retorna as coisas para mim de qualquer forma).
+Esse segundo SELECT não é recomendado pois usar o IN não é boa prática, existem
+outras formas de fazer esse tipo de consulta que são muito mais inteligentes e
+consumem menos recursos no BD.Quando mais inteligente for o SELECT,melhor.
 
-09min6s
+SELECT - Condição (WHERE/ AND/ OR)
+
+WHERE(coluna/condição)
+
+- =
+- >/ >=
+- </ <=
+- <> / !=
+- LIKE
+- ILIKE
+- IN
+
+Primeira condição sempre WHERE.
+Demais condições, AND ou OR.
+Obs: quanto melhor for a consulta, mais rápido receberei minha busca
+
+Ex: 
+SELECT coluna FROM tabela WHERE data > dezembro AND ativo = TRUE
+(mais exemplos na prática)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
