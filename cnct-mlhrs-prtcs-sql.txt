@@ -1118,7 +1118,9 @@ SELECT tabela_1.campos, tabela_2.campos
 FROM tabela_1
 CROSS JOIN tabela_2
 
-
+teste: 
+no último Select monte as transações de cada cliente e os tipos de transaçaõ
+de cada cliente.
 
 
 
