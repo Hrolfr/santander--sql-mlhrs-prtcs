@@ -1490,6 +1490,119 @@ UPDATE conta SER valor = + 100
 WHERE nome = 'Wally';
 
 COMMIT;
+-----------------------------------------------------------
+d) Conheça as funções que podem ser criadas pelo desenvolvedor
+
+Definição
+
+Conjunto de códigos que são executados *dentro de uma transação*, com a
+finalidadede de facilitar a programação e obter o reaproveitamento/reuti-
+_lização de códigos.
+
+Existem 4 tipos de funções:
+
+- query language functions (funções escritas em SQL);
+- procedural language functions (funções escritas em,por exemplo,
+PL/pgSQL ou PL/py);
+- internal functions;
+- C-language functions
+
+Porém, o foco aqui é falar sobre USER DEFINED FUNCTIONS.
+Funções que podem ser criadas pelo usuário.  
+
+Obs: use funções que façam transações,pois traz segurança e é melhor
+prática.
+
+Linguagens
+
+-SQL
+-PL/PGSQL*
+-PL/PY
+-PL/PHP
+-PL/RUBY
+-PL/JAVA
+-PL/LUA
+- ..........
+
+https://www.postgresql.org/docs/11/external-pl.html
+
+posso escrever funções no postgre com linguagens que eu goste.
+
+Definição
+
+CREATE [OR REPLACE] FUNCTION
+ name ( [ [ argmode ] [argname] argtype [ { DEFAULT | = } default_expr ]
+[, ...] ] )
+[RETURNS rettype
+ | RETURNS TABLE ( column_name column_type [, ...] ) ]
+{ LANGUAGE lang_name
+| TRANSFORM { FOR TYPE type_name } [, ...]
+| WINDOW
+| IMMUTABLE |STABLE | VOLATILE | [NOT] LEAKPROOF
+| CALLED ON NULL INPUT | RETURNS NULL ON NULL INPUT | STRICT 
+| [ EXTERNAL ] SECURITY INVOKER | [ EXTERNAL ] SECURITY DEFINER
+| PARALLEL { UNSAFE | RESTRICTED | SAFE }
+| COST execution_cost
+| ROWA result_rows
+| SET configuration_parameter
+
+03min40s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
