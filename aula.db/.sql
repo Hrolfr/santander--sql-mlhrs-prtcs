@@ -346,9 +346,98 @@ SELECT cliente_nome, tipo_transacao_nome, tipo_transacao_valor
 FROM clientes_e_transacoes;
 
 
+--------------------------------------------------------------------
+SELECT numero,nome,ativo
+FROM banco;
 
+CREATE OR REPLACE VIEW vw_banco AS (
+ SELECT numero,nome,ativo
+ FROM banco
+);
 
+SELECT numero,nome,ativo 
+FROM vw_banco;
 
+CREATE OR REPLACE VIEW vw_bancos_2 (banco_numero,banco_nome,banco_ativo) AS (
+ SELECT numero,nome,ativo
+ FROM banco 
+);
+
+SELECT banco_numero,banco_nome,banco_ativo 
+FROM vw_bancos_2;
+
+INSERT INTO vw_bancos_2 (banco_numero,banco_nome,banco_ativo) 
+VALUES (51,'Banco Boa Ideia',TRUE);
+
+SELECT banco_numero,banco_nome,banco_ativo FROM vw_bancos_2 WHERE banco_numero = 51;
+SELECT numero,nome,ativo FROM banco WHERE numero = 51;
+
+UPDATE vw_bancos_2 SET banco_ativo = FALSE WHERE banco_numero = 51;
+
+DELETE FROM vw_bancos_2 WHERE banco_numero = 51;
+-- Apagou
+
+CREATE OR REPLACE TEMPORARY VIEW vw_agencia AS(
+ SELECT nome FROM agencia
+);
+
+SELECT nome FROM vw_agencia;
+----------------------------------------
+se eu sair e em outro query tools colocar:
+
+SELECT nome FROM vw_agencia;
+gera: ERROR:  relation "vw_agencia" does not exist
+LINE 1: SELECT nome FROM vw_agencia;
+                         ^
+SQL state: 42P01
+Character: 18 
+-------------------------------------------
+
+CREATE OR REPLACE VIEW vw_bancos_ativos AS(
+ SELECT numero,nome,ativo
+ FROM banco
+ WHERE ativo IS TRUE	
+); --WITH LOCAL CHECK OPTION;
+
+INSERT INTO vw_bancoS_ativos (numero,nome,ativo) VALUES (51,'Banco Boa Ideia', FALSE);
+-- ERROR:  new row violates check option for view "vw_bancos_ativos"
+--DETAIL:  Failing row contains (51, Banco Boa Ideia, f, 2021-08-20 10:58:25.77441).
+--SQL state: 44000
+
+-- veio o erro por causa do WITH LOCAL CHECK OPTION
+
+CREATE OR REPLACE VIEW vw_bancos_com_a AS (
+ SELECT numero,nome,ativo
+ FROM vw_bancos_ativos
+ WHERE nome ILIKE 'a%'	
+)WITH CASCADED CHECK OPTION; --WITH LOCAL CHECK OPTION;
+
+SELECT numero,nome,ativo FROM vw_bancos_com_a;
+--e não tem nenhum KKKKKKKKKKK
+
+INSERT INTO vw_bancoS_com_a (numero,nome,ativo) VALUES (333,'Beta Omega', TRUE);
+-- ERROR:  new row violates check option for view "vw_bancos_com_a"
+--DETAIL:  Failing row contains (333, Beta Omega, t, 2021-08-20 11:03:48.008099).
+--SQL state: 44000
+-- Não funciona pois descumpre a condição,se inicia com B.
+
+INSERT INTO vw_bancoS_com_a (numero,nome,ativo) VALUES (333,'Alfa Omega', TRUE);
+--Funciona
+
+INSERT INTO vw_bancoS_com_a (numero,nome,ativo) VALUES (331,'Alfa Gama', FALSE);
+--ERROR:  new row violates check option for view "vw_bancos_ativos"
+--DETAIL:  Failing row contains (331, Alfa Gama, f, 2021-08-20 11:06:11.249121).
+--SQL state: 44000
+
+--fui lá em cima e comentei o WITH LOCAL CHECK OPTION,então funciona
+-- coloquei WITH CASCADED CHECK OPTION no bancos com a
+
+INSERT INTO vw_bancoS_com_a (numero,nome,ativo) VALUES (332,'Alfa Gama Beta', FALSE);
+--ERROR:  new row violates check option for view "vw_bancos_ativos"
+--DETAIL:  Failing row contains (332, Alfa Gama Beta, f, 2021-08-20 11:11:22.682024).
+--SQL state: 44000
+
+--pois o cascaded valida a regra da bancos ativos e bancos com a mesmo sem ter a informação
 
 
 
