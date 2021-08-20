@@ -1372,72 +1372,6 @@ CREATE OR REPLACE VIEW vw_bancos_ativos AS (
  SELECT numero,nome,ativo
  FROM banco
  WHERE ativo IS TRUE
-); WITH LOCAL CHECK OPTION;
-
-CREATE OR REPLACE VIEW vw_bancos_maiores_que_100 AS(
- SELECT numero,nome,ativo
- FROM vw_banco
- WHERE numero > 100
-); WITH LOCAL CHECK OPTION;
-
-INSERT INTO vw_bancos_maiores_que_100 (numero,nome,ativo) 
-VALUES (99,'Banco DIO',FALSE)
---ERRO (99 é menor que 100)
-INSERT INTO vw_bancos_maiores_que_100 (numero,nome,ativo)
- VALUES (200,'Banco DIO',FALSE)
---ERRO (tentando passar o ativo como false, e ele valida o ativo da primeira
-view que é vw_bancos_ativos)
-
-Tá, mas como faço funcionar?
-
-CREATE OR REPLACE VIEW vw_bancos_ativos AS (
- SELECT numero,nome,ativo
- FROM banco
- WHERE ativo IS TRUE
-); WITH LOCAL CHECK OPTION;
-
-CREATE OR REPLACE VIEW vw_bancos_maiores_que_100 AS(
- SELECT numero,nome,ativo
- FROM vw_banco
- WHERE numero > 100
-); WITH LOCAL CHECK OPTION;
-
-INSERT INTO vw_bancos_maiores_que_100 (numero,nome,ativo) 
-VALUES (99,'Banco DIO',FALSE)
---ERRO (99 é menor que 100)
-INSERT INTO vw_bancos_maiores_que_100 (numero,nome,ativo)
- VALUES (200,'Banco DIO',FALSE)
---ERRO (tentando passar o ativo como false, e ele valida o ativo da primeira
-view que é vw_bancos_ativos)
-
-Tá, mas como faço funcionar?
-
-CREATE OR REPLACE VIEW vw_bancos_ativos AS (
- SELECT numero,nome,ativo
- FROM banco
- WHERE ativo IS TRUE
-); WITH LOCAL CHECK OPTION;
-
-CREATE OR REPLACE VIEW vw_bancos_maiores_que_100 AS(
- SELECT numero,nome,ativo
- FROM vw_banco
- WHERE numero > 100
-); WITH LOCAL CHECK OPTION;
-
-INSERT INTO vw_bancos_maiores_que_100 (numero,nome,ativo) 
-VALUES (99,'Banco DIO',FALSE)
---ERRO (99 é menor que 100)
-INSERT INTO vw_bancos_maiores_que_100 (numero,nome,ativo)
- VALUES (200,'Banco DIO',FALSE)
---ERRO (tentando passar o ativo como false, e ele valida o ativo da primeira
-view que é vw_bancos_ativos)
-
-Tá, mas como faço funcionar?
-
-CREATE OR REPLACE VIEW vw_bancos_ativos AS (
- SELECT numero,nome,ativo
- FROM banco
- WHERE ativo IS TRUE
 ); 
 
 CREATE OR REPLACE VIEW vw_bancos_maiores_que_100 AS(
@@ -1479,6 +1413,57 @@ nesse caso, o último insert não é inserido e retorna ero.
 
 Desafio: fazer o select da view recursiva retornando o nome do meu
 gerente.
+
+-------------------------------------------------------------------------
+b) Conheça um dos principais conceitos de banco de dados: transações
+
+Definição
+Conceito funamental de todos os sistemas de banco de dados.Conceito de
+múltiplas etapas/códigos reunidos em apenas 1 transação, onde o resultado 
+precisa ser tudo ou nada.
+
+Exemplos:
+
+UPDATE conta SET valor = valor - 100.00
+ WHERE nome = 'Alice';
+
+
+UPDATE conta SET valor = valor + 100.00
+ WHERE nome = 'Bob';
+(a Alice tá enviando dinheiro pra conta do Bob)
+
+E se acontece algum problema de Update na transação?
+- Update na conta da Alice;
+-Sem Update na conta do Bob;
+-O dinheiro soma, não vai a lugar nenhum.
+
+É para isso que existe o conceito de transações.
+
+Temos:
+Exemplos:
+
+BEGIN(BEGIN TRANSACTION);
+
+UPDATE conta SET valor = valor - 100
+WHERE nome = 'Alice';
+
+UPDATE conta SER valor = + 100
+WHERE nome = 'Bob';
+
+COMMIT; 
+
+se acontecer algum erro no meio, o resultado é um rollback.
+Desfaz todas as transações executadas entre o BEGIN e o COMMIT.
+Se não acontecer nenhum eroro na transação,o COMMIT vem - aprova a transação.
+Obs: outra pessoa não pode ver o que acontece na minha transação até que
+eu commite ela.
+
+o programador 2 só vai saber no commit 
+
+
+
+
+
 
 
 
