@@ -1460,10 +1460,36 @@ eu commite ela.
 
 o programador 2 só vai saber no commit 
 
+Quando dá problema:
 
+BEGIN(BEGIN TRANSACTION);
 
+UPDATE conta SET valor = valor - 100
+WHERE nome = 'Alice';
 
+UPDATE conta SER valor = + 100
+WHERE nome = 'Bob';
 
+ROLLBACK;
+ 
+savepoint: se acontecer algo,posso retornar a ele.
+
+Exemplo:
+UPDATE conta SET valor = valor - 100
+WHERE nome = 'Alice';
+
+SAVEPOINT my_savepoint;
+
+UPDATE conta SER valor = + 100
+WHERE nome = 'Bob';
+-- oops... não é para o Bob, é para o Wally!!
+
+ROLLBACK TO my_safepoint;
+
+UPDATE conta SER valor = + 100
+WHERE nome = 'Wally';
+
+COMMIT;
 
 
 
