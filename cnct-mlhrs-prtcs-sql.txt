@@ -1477,6 +1477,9 @@ INSERT INTO vw_bancos_maiores_que_100 (numero,nome,ativo)
 CASCADED vai validar as opções da view atual e das quais ela faz referencia,então
 nesse caso, o último insert não é inserido e retorna ero.
 
+Desafio: fazer o select da view recursiva retornando o nome do meu
+gerente.
+
 
 
 
