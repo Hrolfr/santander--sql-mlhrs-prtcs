@@ -1122,8 +1122,33 @@ teste:
 no último Select monte as transações de cada cliente e os tipos de transaçaõ
 de cada cliente.
 
+20/08/21
+d) Otimizando o código com CTE
 
+Commmon Table Expressions - CTE
+Forma auxiliar de organizar "statements", ou seja, blocos de códigos,
+para consultas muito grandes,gerando tabelas temporárias e criando relacio-
+_namento entre elas.
 
+Dentro dos statements podem ter SELECTs,INSERTs,UPDATEs ou DELETEs. 
+
+Obs: usam CTE quando há uma lógica mais complexa.Com duas tabelas c pode usar
+JOINS
+
+WITH STATEMENTS
+
+WITH [nome1] AS(
+  SELECT (campos,)
+  FROM tabela_A
+  [WHERE]
+), [nome2] AS (
+  SELECT (campos,)
+  FROM tabela_B
+  [WHERE]
+)
+SELECT [nome1].(campos,),[nome2].(campos,)
+FROM [nome1]
+JOIN [nome2] ....
 
 
 
