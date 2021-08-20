@@ -1149,6 +1149,209 @@ WITH [nome1] AS(
 SELECT [nome1].(campos,),[nome2].(campos,)
 FROM [nome1]
 JOIN [nome2] ....
+--------------------------------------------------------------------------
+4) Comandos avançados da Structured Query Language (SQL)
+a) Como as views auxiliam no acesso ao banco de dados
+
+Definição
+Views são visões.
+São "camadas" para as tabelas.
+São "alias" para um ou mais queries.
+Aceitam comandos de SELECT,*INSERT,UPDATE e DELETE*.
+
+CREATE [OR REPLACE] [TEMP \ TEMPORARY] [RECURSIVE] VIEW name [(column_name
+[, ...] )]
+[WITH( view_option_name [= view_option_value] [, ...])]
+AS query
+[WITH [ CASCADED |LOCAL ] CHECK OPTION]
+Obs: view é boa prática de segurança
+se eu crio uma view para cada tabela,faço com que as pessoas que precisem
+consumir o meu bd, consumam as views e não tenham acesso direto as tabelas.
+
+* são especiais pois somente as views que fazem referencia a apenas uma tabela
+aceitam esses comandos.Se eu tiver joins na minha view, ela não vai aceitar os
+comandos, só o select.
+
+CREATE OR REPLACE é a idempotencia da view,e tenha cuidadocom eles,pois
+posso criar uma view com as regras de negócio e tudo, e esquecer que a fiz.
+Se eu entrar com CREATE OR REPLACE uma view com o mesmo nome e as mesmas colunas,
+as vezes com colunas a mais (nunca a menos) e eu acabo substituindo a view
+que criei, e perco códigos iniciais.
+
+TEMP/TEMPORARY
+view temporária, só existirá dentro da minha coisa.Caso eu feche a janela e abra
+novamente,não terei mais acesso aquela view,pois ela era temporária e deixou de
+existir.Outra pessoa que trabalha no mesmo BD que eu não terá acesso,pois
+a view é só minha.
+
+RECURSIVE
+É uma view recursiva.É um SELECT dentro da view que chamará a própria view
+até esgotar determinada opção.
+
+WITH,CASCADED,LOCAL,CHECK OPTION são variações dos comandos INSERT,UPDATE e 
+DELETE da minha view.
+
+Idempotencia
+
+CREATE OR REPLACE VIEW vw_bancos AS (
+ SELECT numero, nome, ativo
+ FROM banco
+); (são bancos da VIEW)
+
+SELECT numero, nome, ativo
+FROM vw_bancos;
+
+CREATE OR REPLACE VIEW vw_bancos (banco_numero,banco_nome, banco_ativo) AS (
+ SELECT nuero, nome, ativo
+ FROM banco
+);
+
+SELECT banco_numero, banco_nome, banco_ativo
+FROM vw_bancos;
+
+não é passado data type pra view,pois eles assumem o tipo de dado da
+consulta.
+
+
+INSERT, UPDATE e DELETE
+
+CREATE OR REPLACE VIEW vw_banco AS(
+ SELECT numero, nome,ativo
+  FROM banco
+);
+
+SELECT numero, nome, ativo
+FROM vw_bancos;
+
+- Funcionam apenas para views com apenas 1 tabela
+
+
+INSERT INTO vw_bancos (numero,nome,ativo) VALUES (100, 'Banco CEM', TRUE);
+(a view será como uma janela pra inserir dados na tabela)
+
+UPDATE vw_bancos SET nome = 'Banco 100' WHERE numero = 100;
+
+DELETE FROM vw_bancos WHERE numero = 100;
+
+TEMPORARY
+
+CREATE OR REPLACE TEMPORARY VIEW vw_bancos AS(
+ SELECT numero, nome, ativo
+ FROM banco
+);
+
+ SELECT numero, nome, ativo
+ FROM vw_bancos;
+
+VIEW presente apenas na sessão do usuário.Se vcx esconectar e conectar novamente,
+a VIEW não estará disponível.
+ 
+RECURSIVE
+
+CREATE OR REPLACE *RECURSIVE* VIEW (nome_da_view)(campos_da_view) AS (
+ SELECT base
+ UNION ALL
+ SELECT campos
+ FROM tabela_base
+ *JOIN(nome_da_view)*
+);
+ 
+-Obrgatório a existencia de campos da VIEW
+-UNION ALL
+
+o comando no interior dela, chamará ela mesma, fazendo com que entre
+em uma espécie de looping.
+
+UNION - agrupa resultados iguais
+UNION ALL - não unifica
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
