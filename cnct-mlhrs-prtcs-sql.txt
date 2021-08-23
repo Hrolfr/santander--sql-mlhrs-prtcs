@@ -1520,8 +1520,8 @@ Linguagens
 -PL/PY
 -PL/PHP
 -PL/RUBY
--PL/JAVA
--PL/LUA
+-PL/Java
+-PL/Lua
 - ..........
 
 https://www.postgresql.org/docs/11/external-pl.html
@@ -1544,17 +1544,50 @@ CREATE [OR REPLACE] FUNCTION
 | PARALLEL { UNSAFE | RESTRICTED | SAFE }
 | COST execution_cost
 | ROWA result_rows
-| SET configuration_parameter
-
-03min40s
-
-
-
+| SET configuration_parameter { TO value | = value | FROM CURRENT }
+| AS 'definition'
+| AS 'obj_file' , 'link_symbol'
+}  ...
 
 
+Idempotencia(regras)
+
+CREATE OR REPLACE FUNCTION [nome da função]
+
+- Mesmo nome
+- Mesmo tipo de retorno
+- Mesmo número de parametros/argumentos
+
+RETURNS
+
+-Tipo de retorno(data type)
+ . INTEGER
+ . CHAR/ VARCHAR
+ . BOOLEAN
+ . ROW
+ . TABLE
+ . JSON
+
+LANGUAGE
+
+- SQL*
+- PLPGSQL*
+- PLJAVA
+- PLPY
+- ...
 
 
+SEGURANÇA
 
+- SECURITY
+ . INVOKER (é o padrão, com ele permito que a função seja executada com as
+permissões do usuário que a executa.Se o usuário (que faz a ação) não tem 
+permissão de fazer insert na tabela, e dentro da função eu faço insert,tomarei
+um erro.)
+ . DEFINER (o usuário que está executando a função com as permissões do usuário
+que criou-a.Se o criador da função for um super usuário, e o que executa-la
+não tiver permissão nenhuma,mesmo assim ele pode executar as funções com o
+super usuário.CUIDADO!)
 
 
 
