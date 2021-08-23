@@ -1693,7 +1693,7 @@ PLPGSQL
 
 CREATE OR REPLACE FUNCTION banco_add (p_numero INTEGER,p_nome VARCHAR, 
 p_ativo BOOLEAN)
-RETURNS BOOLEAN
+RETURNS BOOLEAN (poderia trocar o BOOLEAN por um: VARCHAR inserido com sucesso)
 LANGUAGE PLPGSQL
 AS $$
 DECLARE variavel_id INTEGER;

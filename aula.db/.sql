@@ -466,6 +466,109 @@ UPDATE funcionarios SET gerente = 3 WHERE id = 5;
 COMMIT;
 --voltou a como estava
 
+------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION func_somar (INTEGER,INTEGER)
+RETURNS INTEGER
+SECURITY DEFINER
+RETURNS NULL ON NULL INPUT
+LANGUAGE SQL
+AS $$
+SELECT $1 + $2;
+$$;
+
+SELECT func_somar(1,2);
+
+
+CREATE OR REPLACE FUNCTION func_somar (INTEGER,INTEGER)
+RETURNS INTEGER
+SECURITY DEFINER
+CALLED ON NULL INPUT
+LANGUAGE SQL
+AS $$
+SELECT COALESCE ($1,100) + COALESCE($2,100);
+$$;
+
+SELECT func_somar(1,null);
+-- qualquer coisa que tenha nulo envolvido, tem retorno nulo
+
+--tratamento:
+--COALESCE(boas práticas) retorna o primeiro valor não nulo que encontrar
+
+SELECT COALESCE (null,'daniel');
+--retornou daniel
+
+SELECT COALESCE (null,'daniel', 'digital');
+--retorna daniel
+
+SELECT COALESCE (null,null,'digital','daniel');
+-- retorna digital
+
+--------------------------------------------------
+CREATE OR REPLACE FUNCTION bancos_add (p_numero INTEGER, p_nome VARCHAR, p_ativo BOOLEAN)
+RETURNS INTEGER
+SECURITY INVOKER --crie um user, de permissão restrita a ele e tente executar esse comando
+LANGUAGE PLPGSQL
+CALLED ON NULL INPUT
+AS $$
+DECLARE variavel_id INTEGER;
+BEGIN
+  IF p_numero IS NULL OR p_nome IS NULL OR p_ativo is NULL THEN
+   RETURN 0;
+   END IF;
+  
+  SELECT INTO variavel_id numero
+  FROM banco
+  WHERE numero = p_numero;
+  
+  IF variavel_id IS NULL THEN
+   INSERT INTO banco(numero,nome,ativo)
+   VALUES (p_numero,p_nome,p_ativo);
+  ELSE
+   RETURN variavel_id;
+  END IF;
+  
+  SELECT INTO variavel_id numero
+  FROM banco
+  WHERE numero = p_numero;
+  
+  RETURN variavel_id;
+END; $$; 
+--dentro de transações o final delas é commit, e em funções o final é end
+
+SELECT bancos_add(1, 'Banco Novo', FALSE);
+-- retornou 1,pois identificou que já tm um banco com esse número
+
+SELECT nome,numero,ativo FROM banco WHERE numero = 5433;
+
+SELECT bancos_add(5433, 'Banco Novo em outra porta', true); --retornou certinho
+SELECT bancos_add(5432, 'Banco Novo', false);
+SELECT bancos_add(5432, 'Banco Novo', null);
+-- não existe essa função.Obs: faça tudo aos poucos, pois é mais fácil debugar código pequeno que grande.
+-- eee funciona
+
+--deu null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
