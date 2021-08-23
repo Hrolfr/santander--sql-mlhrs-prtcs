@@ -1589,18 +1589,135 @@ que criou-a.Se o criador da função for um super usuário, e o que executa-la
 não tiver permissão nenhuma,mesmo assim ele pode executar as funções com o
 super usuário.CUIDADO!)
 
+COMPORTAMENTO
+
+- IMMUTABLE
+Não pode alterar o BD.Funções que garantem o mesmo resultado para os mesmos
+agrupamentos/parametros da função.Evitar a utilização de selects, pois tabelas
+podem sofrer alterações.
+- STABLE
+Não pode alterar o BD.Funções que garantem o mesmo resultado para os mesmos
+argumentos/parametros da função.Trabalha melhor com tipos de current_timestamp
+e outros tipos de variáveis.Podem conter selct.
+-VOLATILLE
+Comportamento padrão.Aceita todos os cenários.
+
+SEGURANÇA E BOAS PRÁTICAS
+
+- CALLED ON NULL INPUT
+Padrão.Se qualquer um dos parametros/argumentos for NULL, a função será
+executada.
+
+-RETURN NULL ON NULL INPUT
+Se qualquer um dos parametros/argumentos for NULL, a função retornará NULL,não
+executará.
+
+Obs: normalmente as documentações me pedem para usar CALLED ON NULL pois é
+responsabilidade de quem desenvolve a função que faça o tratamento de cada
+parametro (boa prática).Porém se eu não quiser esquentar a cabeça, não quero
+fazer tratamento de campo por campo RETURNS NULL ON NULL INPUT.
+
+SEGURANÇA E BOAS PRÁTICAS
+
+-SECURITY INVOKER
+Padrão.A função é executada com as permissões de quem executa.
+
+-SECURITY DEFINER
+A função é executada com as permissões de quem criou-a.
+
+RECURSOS
+
+-COST
+Custo/row em unidades de CPU.
+
+-ROWS
+Número estimado de linhas que será analisado pelo planner.
+
+SQL FUNCTIONS
+
+Não é possível utilizar transações
+
+CREATE OR REPLACE FUNCTION fc_somar(INTEGER,INTEGER)
+RETURNS INTEGER
+LANGUAGE SQL
+AS $$
+        SELECT $1 + $2;
+$$;
+
+CREATE OR REPLACE FUNCTION fc_somar (num1 INTEGER,num2 INETEGER)
+RETURNS INTEGER
+LANGUAGE SQL
+AS $$ 
+        SELECT num1 + num2;
+$$
+
+(se eu colocar o begin,tomo um erro lkkkkkk nice)
+
+$$ entre a definiçaõ do $$ e o final dele, o conteúdo é o corpo da função,
+o que a função vai executar.
 
 
+pra retornar não é usado return, e sim select
 
 
+$1 e $2 são os parametros.É ruim ver assim, né?Vc pode dar nome aos parametros
+
+(ele recomenda a parte de baixo,pois é boa prática utilizar coisas específicas)
+
+---------------------
+ 
+CREATE OR REPLACE FUNCTIONS fc_bancos_add (p_numero INTEGER, p_nome VARCHAR,
+p_ativo BOOLEAN)
+RETURNS TABLE (numero INTEGER, nome VARCHAR)
+RETURNS NULL ON NULL INPUT
+LANGUAGE SQL
+AS $$
+      INSERT INTO banco (numero, nome, ativo)
+      VALUES (p_numero, p_nome, p_ativo);
+       
+      SELECT numero,nome
+      FROM banco
+      WHERE numero = p_numero;
+$$;
+ 
+numero,nome,ativo são campos obrigatórios
+
+no returns table é como se eu criasse uma tabla temporária para retornar
+um tipo de dado.
+
+Obs: nesse caso eu não preciso tratar os argumentos por causa do 
+null on null input.Caso eu colocasse o called on input, aí sim eu trataria.
 
 
+PLPGSQL
 
+CREATE OR REPLACE FUNCTION banco_add (p_numero INTEGER,p_nome VARCHAR, 
+p_ativo BOOLEAN)
+RETURNS BOOLEAN
+LANGUAGE PLPGSQL
+AS $$
+DECLARE variavel_id INTEGER;
+BEGIN
 
+       SELECT INTO variavel_id numero FROM banco WHERE nome = p_nome;
 
+       IF variavel_id IS NULL THEN
+         INSERT INTO banco (numero, nome, ativo) VALUES (p_numero, p_nome, 
+       p_ativo)
+       ELSE
+         RETURN FALSE;
+       END IF;
 
+       SELECT INTO variavel_id numero FROM banco WHERE nome = p_nome;
+  
+       IF variavel_id IS NULL THEN
+            RETURN FALSE;
+       ELSE
+           RETURN TRUE;
+       END IF;
+END; $$;
 
-
+SELECT banco_add(13, 'Banco azarado', true);
 
 
 
